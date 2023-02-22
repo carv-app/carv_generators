@@ -1,2 +1,3 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+Sample usage for [package:carv_generators]
+
+[package:carv_generators]: https://pub.dev/packages/carv_generators
