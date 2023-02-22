@@ -1,4 +1,5 @@
-[![Pub Package](https://img.shields.io/pub/v/carv_generators.svg)](https://pub.dev/packages/carv_generators)
+Generators - [![Pub Package](https://img.shields.io/pub/v/carv_generators.svg)](https://pub.dev/packages/carv_generators)
+Annotations - [![Pub Package](https://img.shields.io/pub/v/carv_annotations.svg)](https://pub.dev/packages/carv_annotations)
 
 Provides [Dart Build System] builders for Generating boilerplate code for Carv app.
 

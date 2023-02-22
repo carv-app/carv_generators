@@ -1,16 +1,18 @@
 name: carv_generators
 description: >-
   Code generation package for Carv App which works combinely with `carv_annotations` package.
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/carv-app/carv_generators
 
 environment:
   sdk: '>=2.19.1 <3.0.0'
 
 dependencies:
-  build:
-  source_gen: 
+  analyzer: ^5.6.0
+  build: ^2.3.1
   carv_annotations: ^1.0.0
+  meta: ^1.8.0
+  source_gen: ^1.2.7
 
 dev_dependencies:
   test:

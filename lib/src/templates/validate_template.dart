@@ -2,10 +2,12 @@
 
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:carv_generators/src/templates/template_base.dart';
+import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
 /// Generates the extension for validating the model
 ///
+@internal
 class ModelValidateExtensionTemplate implements TemplateBase {
   /// The model class with data
   final AnnotatedElement modelClass;
@@ -20,7 +22,7 @@ class ModelValidateExtensionTemplate implements TemplateBase {
     final validators = modelClass.annotation.read('validators').listValue;
 
     buffer.writeln(
-        'extension _\$${modelClass.element.displayName}Validator on ${modelClass.element.displayName} {');
+        'extension \$${modelClass.element.displayName}Validator on ${modelClass.element.displayName} {');
 
     buffer.writeln('Future<void> validate() async {');
     // generate the validation rules
@@ -77,7 +79,7 @@ class ModelValidateExtensionTemplate implements TemplateBase {
 
   /// Generates the rule for validating an email field
   String _generateRuleForEmailField(String varName) {
-    return 'if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#\$%&\'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\\.[a-zA-Z]+").hasMatch(data.$varName)) { throw ArgumentError("Field \'$varName\' is not a valid email address."); }';
+    return 'if (data.$varName != null && !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#\$%&\'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\\.[a-zA-Z]+").hasMatch(data.$varName!)) { throw ArgumentError("Field \'$varName\' is not a valid email address."); }';
   }
 
   /// Generates the rule for validating a minimum length field

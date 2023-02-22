@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      carv_generators|modelValidatableGenerator:
+        enabled: true
+        generate_for:
+          - lib/**_model.dart
