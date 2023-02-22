@@ -1,39 +1,72 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+[![Pub Package](https://img.shields.io/pub/v/carv_generators.svg)](https://pub.dev/packages/carv_generators)
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+Provides [Dart Build System] builders for Generating boilerplate code for Carv app.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+The builders generate code when they find classes/functions annotated with classes defined in [package:carv_annotations].
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Supporting Builders
+    - Model Validate function (will be generate as an Extension)
 
-## Features
+## Setup
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+To configure your project with carv_generators follow these steps;
 
-## Getting started
+Add dependencies in your `pubspec.yaml` file.
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```yaml
+dependencies:
+    carv_annotations: ^latest-version
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+dev_dependencies:
+    build_runner:
+    carv_generators: ^latest-version
 ```
 
-## Additional information
+create a `build.yaml` file in the root app folder and add the below code block.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```yaml
+targets:
+  $default:
+    builders:
+      carv_generators|modelValidatableGenerator:
+        enabled: true
+        generate_for:
+          - lib/**_model.dart
+```
+
+Given your Domain model is `meeting_model.dart`:
+
+```dart
+import 'package:carv_annotations/carv_annotations.dart';
+
+part 'meeting_model.g.dart';
+
+@ModelValidate([
+    Validatable('name', Validator(ValidatorType.required)),
+    Validatable('email', Validator(ValidatorType.email)),
+    Validatable('password', Validator(ValidatorType.minLength, matcher: 8)),
+])
+class MeetingModel {
+  @override
+  final Meeting data; // your pb data model :-> Meeting(name, email, password)
+
+    // the rest of the code
+    // goes below
+}
+```
+
+Then run the following command to generate code for you.
+
+```bash
+flutter pub run build_runner build
+```
+
+or
+
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs 
+```
+
+### TODO: 
+    - Improve test coverage
+    - Add more generators

@@ -9,6 +9,7 @@ import 'package:source_gen/source_gen.dart';
 
 const _modelValidateChecker = TypeChecker.fromRuntime(ModelValidate);
 
+/// Generates the extension for validating the model
 class ValidateGenerator extends Generator {
   @override
   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) {
