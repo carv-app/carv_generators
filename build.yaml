@@ -1,0 +1,8 @@
+builders:
+  modelValidatableGenerator:
+    import: "package:carv_generators/carv_generators.dart"
+    builder_factories: ["generateValidatableExtension"]
+    build_extensions: { ".dart": ["validatable.g.dart"] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
