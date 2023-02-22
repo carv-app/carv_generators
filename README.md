@@ -70,3 +70,6 @@ flutter pub run build_runner build --delete-conflicting-outputs
 ### TODO: 
     - Improve test coverage
     - Add more generators
+
+[dart build system]: https://github.com/dart-lang/build
+[package:carv_annotations]: https://pub.dev/packages/carv_annotations
